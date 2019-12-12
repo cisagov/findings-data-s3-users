@@ -6,15 +6,15 @@ resource "aws_iam_user" "user" {
   tags = var.tags
 }
 
-# Put the users in the IAM group that gives them permission to read
-# the BOD 18-091 Lambda logs.
+# Put the users in the IAM group that gives them permission to read/write
+# the findings data S3 bucket.
 resource "aws_iam_user_group_membership" "user" {
   count = length(var.usernames)
 
   user = aws_iam_user.user[count.index].name
 
   groups = [
-    aws_iam_group.bod_log_watchers.name,
+    aws_iam_group.findings_data_s3_users.name,
   ]
 }
 

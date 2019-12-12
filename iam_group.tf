@@ -1,65 +1,45 @@
-# An IAM group for all the folks who want read-only access to the BOD
-# 18-01 scanning logs.
-resource "aws_iam_group" "bod_log_watchers" {
-  name = "bod_log_watchers"
+# An IAM group for all the folks who want read-write access to the
+# findings data S3 bucket.
+resource "aws_iam_group" "findings_data_s3_users" {
+  name = "findings_data_s3_users"
 }
 
-# Import some data about the already-existing log groups
-data "aws_cloudwatch_log_group" "bod_lambda_logs" {
-  count = length(var.scan_types)
-
-  name = "/aws/lambda/${var.lambda_function_names[var.scan_types[count.index]]}"
+data "aws_s3_bucket" "findings_data" {
+  bucket = local.production_workspace ? format("%s-production", var.findings_data_s3_bucket) : format("%s-%s", var.findings_data_s3_bucket, terraform.workspace)
 }
 
-# IAM policy documents that allow reading of CloudWatch logs related
-# to BOD 18-01 scanning.  This will be applied to the IAM group we are
-# creating.
-data "aws_iam_policy_document" "bod_lambda_log_doc" {
-  count = length(var.scan_types)
+# IAM policy documents that allow reading and writing to the findings data
+# S3 bucket. This will be applied to the IAM group we are creating.
+data "aws_iam_policy_document" "findings_data_s3_doc" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:ListBucket",
+    ]
+
+    resources = [
+      data.aws_s3_bucket.findings_data.arn,
+    ]
+  }
 
   statement {
     effect = "Allow"
 
     actions = [
-      "logs:DescribeLogStreams",
-      "logs:FilterLogEvents",
-      "logs:GetLogEvents",
+      "s3:GetObject",
+      "s3:PutObject",
     ]
 
     resources = [
-      data.aws_cloudwatch_log_group.bod_lambda_logs[count.index].arn,
+      "${data.aws_s3_bucket.findings_data.arn}/*"
     ]
   }
 }
 
-# IAM policy document that allows listing of CloudWatch log groups.
-# This will be applied to the IAM group we are creating.
-data "aws_iam_policy_document" "list_log_doc" {
-  statement {
-    effect = "Allow"
-
-    actions = [
-      "logs:DescribeLogGroups",
-    ]
-
-    resources = [
-      "*",
-    ]
-  }
-}
-
-# The CloudWatch log policy for our IAM group that lets the users view
-# the BOD 18-01 Lambda logs.
-resource "aws_iam_group_policy" "bod_log_watchers" {
-  count = length(var.scan_types)
-
-  group  = aws_iam_group.bod_log_watchers.id
-  policy = data.aws_iam_policy_document.bod_lambda_log_doc[count.index].json
-}
-
-# The CloudWatch log policy for our IAM group that lets the users list
-# the CloudWatch log groups associated with the account.
-resource "aws_iam_group_policy" "list_logs" {
-  group  = aws_iam_group.bod_log_watchers.id
-  policy = data.aws_iam_policy_document.list_log_doc.json
+# The policy for our IAM group that lets the users read/write to
+# the findings data S3 bucket.
+resource "aws_iam_group_policy" "findings_data_s3_users" {
+  group  = aws_iam_group.findings_data_s3_users.id
+  policy = data.aws_iam_policy_document.findings_data_s3_doc.json
 }

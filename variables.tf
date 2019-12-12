@@ -3,25 +3,14 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
-variable "aws_availability_zone" {
-  description = "The AWS availability zone to deploy into (e.g. a, b, c, etc.)."
-  default     = "a"
-}
-
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to all AWS resources created"
   default     = {}
 }
 
-variable "scan_types" {
-  type        = list(string)
-  description = "The scan types that can be run."
-}
-
-variable "lambda_function_names" {
-  type        = map(string)
-  description = "The names to use for the Lambda functions.  The keys are the values in scan_types."
+variable "findings_data_s3_bucket" {
+  description = "The name of the S3 bucket where findings data is stored.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace_name>' is automatically appended to this bucket name."
 }
 
 variable "usernames" {
