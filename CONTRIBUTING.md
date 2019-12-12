@@ -15,7 +15,7 @@ all of which should be in this repository.
 
 If you want to report a bug or request a new feature, the most direct
 method is to [create an
-issue](https://github.com/cisagov/bod-18-01-cloudwatch-users/issues)
+issue](https://github.com/cisagov/findings-data-s3-users/issues)
 in this repository.  We recommend that you first search through
 existing issues (both open and closed) to check if your particular
 issue has already been reported.  If it has then you might want to add
@@ -25,7 +25,7 @@ create a new one.
 ## Pull requests ##
 
 If you choose to [submit a pull
-request](https://github.com/cisagov/bod-18-01-cloudwatch-users/pulls),
+request](https://github.com/cisagov/findings-data-s3-users/pulls),
 you will notice that our continuous integration (CI) system runs a
 fairly extensive set of linters and syntax checkers.  Your pull
 request may fail these checks, and that's OK.  If you want you can
@@ -78,9 +78,9 @@ can create and configure the Python virtual environment with these
 commands:
 
 ```console
-cd bod-18-01-cloudwatch-users
-pyenv virtualenv <python_version_to_use> bod-18-01-cloudwatch-users
-pyenv local bod-18-01-cloudwatch-users
+cd findings-data-s3-users
+pyenv virtualenv <python_version_to_use> findings-data-s3-users
+pyenv local findings-data-s3-users
 pip install -r requirements-test.txt
 ```
 

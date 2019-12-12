@@ -1,9 +1,9 @@
-# bod-18-01-cloudwatch-users #
+# findings-data-s3-users #
 
-[![Build Status](https://travis-ci.com/cisagov/bod-18-01-cloudwatch-users.svg?branch=develop)](https://travis-ci.com/cisagov/bod-18-01-cloudwatch-users)
+[![GitHub Build Status](https://github.com/cisagov/findings-data-s3-users/workflows/build/badge.svg)](https://github.com/cisagov/findings-data-s3-users/actions)
 
 This is a Terraform project for creating AWS users that only have
-permission to view CloudWatch logs related to BOD 18-01 scanning.
+permission to read and write to the S3 bucket that stores findings data.
 
 ## Contributing ##
 
