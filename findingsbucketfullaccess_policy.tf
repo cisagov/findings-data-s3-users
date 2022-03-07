@@ -1,6 +1,6 @@
 # IAM policy documents that allow reading and writing to the findings data
 # S3 bucket. This will be applied to the IAM group we are creating.
-data "aws_iam_policy_document" "findings_data_s3_doc" {
+data "aws_iam_policy_document" "findingsbucketfullaccess_policy_doc" {
   statement {
     effect = "Allow"
 
@@ -31,4 +31,11 @@ data "aws_iam_policy_document" "findings_data_s3_doc" {
       "${data.aws_s3_bucket.findings_data.arn}/*"
     ]
   }
+}
+
+# The policy for that allows full access to the findings data S3 bucket
+resource "aws_iam_policy" "findingsbucketfullaccess_policy" {
+  description = var.findingsbucketfullaccess_policy_description
+  name        = var.findingsbucketfullaccess_policy_name
+  policy      = data.aws_iam_policy_document.findingsbucketfullaccess_policy_doc.json
 }

@@ -26,6 +26,18 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "findingsbucketfullaccess_policy_description" {
+  default     = "Allows full access to the S3 bucket where findings data is stored."
+  description = "The description to associate with the IAM policy that allows full access to the findings data S3 bucket."
+  type        = string
+}
+
+variable "findingsbucketfullaccess_policy_name" {
+  default     = "FindingsBucketFullAccess"
+  description = "The name to associate with the IAM policy that allows full access to the findings data S3 bucket."
+  type        = string
+}
+
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to all AWS resources created."

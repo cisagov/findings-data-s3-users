@@ -4,9 +4,7 @@ resource "aws_iam_group" "findings_data_s3_users" {
   name = "findings_data_s3_users"
 }
 
-# The policy for our IAM group that lets the users read/write to
-# the findings data S3 bucket.
-resource "aws_iam_group_policy" "findings_data_s3_users" {
-  group  = aws_iam_group.findings_data_s3_users.id
-  policy = data.aws_iam_policy_document.findings_data_s3_doc.json
+resource "aws_iam_group_policy_attachment" "findingsbucketfullaccess_policy_attachment" {
+  group      = aws_iam_group.findings_data_s3_users.name
+  policy_arn = aws_iam_policy.findingsbucketfullaccess_policy.arn
 }
