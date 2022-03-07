@@ -5,6 +5,12 @@
 # ------------------------------------------------------------------------------
 data "aws_caller_identity" "current" {}
 
+# Retrieve information about the findings data bucket we will be providing access
+# for with this workspace.
+data "aws_s3_bucket" "findings_data" {
+  bucket = local.production_workspace ? format("%s-production", var.findings_data_s3_bucket) : format("%s-%s", var.findings_data_s3_bucket, terraform.workspace)
+}
+
 locals {
   # This is a goofy but necessary way to determine if
   # terraform.workspace contains the substring "prod"
