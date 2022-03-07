@@ -9,9 +9,9 @@ variable "findings_data_s3_bucket" {
   description = "The name of the S3 bucket where findings data is stored.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace_name>' is automatically appended to this bucket name."
 }
 
-variable "usernames" {
+variable "users" {
   type        = list(string)
-  description = "The usernames associated with the accounts to be created.  The format first.last is recommended."
+  description = "A list of the usernames for the users that should be given access to the S3 bucket that manages Assessment findings data."
 }
 
 # ------------------------------------------------------------------------------
