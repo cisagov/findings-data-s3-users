@@ -1,7 +1,7 @@
 # The IAM group for all the folks who want read-write access to the
 # findings data S3 bucket.
 resource "aws_iam_group" "findings_data_s3_users" {
-  name = "findings_data_s3_users"
+  name = local.findings_data_s3_users_group_name
 }
 
 # The IAM policy attachment to allow the IAM group full access to the findings

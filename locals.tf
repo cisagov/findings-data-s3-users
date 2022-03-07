@@ -15,4 +15,6 @@ locals {
   # This is a goofy but necessary way to determine if
   # terraform.workspace contains the substring "prod"
   production_workspace = replace(terraform.workspace, "prod", "") != terraform.workspace
+
+  findings_data_s3_users_group_name = local.production_workspace ? format("%s-production", var.findings_data_s3_users_group_name) : format("%s-%s", var.findings_data_s3_users_group_name, terraform.workspace)
 }

@@ -26,6 +26,12 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "findings_data_s3_users_group_name" {
+  default     = "findings_data_s3_users"
+  description = "The base name of the group to be created for findings data S3 bucket access users. This value has the Terraform workspace appended."
+  type        = string
+}
+
 variable "findingsbucketfullaccess_policy_description" {
   default     = "Allows full access to the S3 bucket where findings data is stored."
   description = "The description to associate with the IAM policy that allows full access to the findings data S3 bucket."
