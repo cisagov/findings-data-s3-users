@@ -35,6 +35,6 @@ data "aws_iam_policy_document" "findingsbucketfullaccess_policy_doc" {
 # The IAM policy for that allows full access to the findings data S3 bucket
 resource "aws_iam_policy" "findingsbucketfullaccess_policy" {
   description = var.findingsbucketfullaccess_policy_description
-  name        = var.findingsbucketfullaccess_policy_name
+  name        = local.findingsbucketfullaccess_policy_name
   policy      = data.aws_iam_policy_document.findingsbucketfullaccess_policy_doc.json
 }

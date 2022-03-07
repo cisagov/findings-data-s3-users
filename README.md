@@ -101,7 +101,7 @@ No modules.
 | findings\_data\_s3\_bucket | The name of the S3 bucket where findings data is stored.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace\_name>' is automatically appended to this bucket name. | `string` | n/a | yes |
 | findings\_data\_s3\_users\_group\_name | The base name of the group to be created for findings data S3 bucket access users. This value has the Terraform workspace appended. | `string` | `"findings_data_s3_users"` | no |
 | findingsbucketfullaccess\_policy\_description | The description to associate with the IAM policy that allows full access to the findings data S3 bucket. | `string` | `"Allows full access to the S3 bucket where findings data is stored."` | no |
-| findingsbucketfullaccess\_policy\_name | The name to associate with the IAM policy that allows full access to the findings data S3 bucket. | `string` | `"FindingsBucketFullAccess"` | no |
+| findingsbucketfullaccess\_policy\_name | The base name to associate with the IAM policy that allows full access to the findings data S3 bucket.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace\_name>' is automatically appended to this bucket name. | `string` | `"FindingsBucketFullAccess"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 | users | A list of the usernames for the users that should be given access to the S3 bucket that manages Assessment findings data. | `list(string)` | n/a | yes |
 

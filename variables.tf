@@ -40,7 +40,7 @@ variable "findingsbucketfullaccess_policy_description" {
 
 variable "findingsbucketfullaccess_policy_name" {
   default     = "FindingsBucketFullAccess"
-  description = "The name to associate with the IAM policy that allows full access to the findings data S3 bucket."
+  description = "The base name to associate with the IAM policy that allows full access to the findings data S3 bucket.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace_name>' is automatically appended to this bucket name."
   type        = string
 }
 
