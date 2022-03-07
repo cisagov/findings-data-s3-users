@@ -28,7 +28,7 @@ variable "aws_region" {
 
 variable "findings_data_s3_users_group_name" {
   default     = "findings_data_s3_users"
-  description = "The base name of the group to be created for findings data S3 bucket access users. This value has the Terraform workspace appended."
+  description = "The base name of the group to be created for findings data S3 bucket access users.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace_name>' is automatically appended to this bucket name."
   type        = string
 }
 
