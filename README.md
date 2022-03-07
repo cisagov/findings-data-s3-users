@@ -17,6 +17,10 @@ project.
   (specified in [`backend.tf`](backend.tf)).
 - An accessible AWS DynamoDB database to store the Terraform state lock
   (specified in [`backend.tf`](backend.tf)).
+- User accounts for all users must have been created previously. We recommend
+  using the
+  [`cisagov/cyhy-users-non-admin`](https://github.com/cisagov/cyhy-users-non-admin)
+  repository to create users.
 
 ## Customizing Your Environment ##
 
