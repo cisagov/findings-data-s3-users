@@ -29,7 +29,7 @@ aws_region = "us-east-2"
 
 findings_data_s3_bucket = "findings-data"
 
-usernames = ["john.doe". "jane.smith"]
+users = ["john.doe". "jane.smith"]
 
 tags = {
   Team        = "CISA Development Team"
@@ -85,10 +85,11 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_group.findings_data_s3_users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group) | resource |
-| [aws_iam_group_policy.findings_data_s3_users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy) | resource |
+| [aws_iam_group_policy_attachment.findingsbucketfullaccess_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_group_policy_attachment) | resource |
+| [aws_iam_policy.findingsbucketfullaccess_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_user_group_membership.user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_user_group_membership) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.findings_data_s3_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.findingsbucketfullaccess_policy_doc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_user.users](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_user) | data source |
 | [aws_s3_bucket.findings_data](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket) | data source |
 
@@ -98,6 +99,9 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
 | findings\_data\_s3\_bucket | The name of the S3 bucket where findings data is stored.  Note that in production workspaces, '-production' is automatically appended this bucket name.  In non-production workspaces, '-<workspace\_name>' is automatically appended to this bucket name. | `string` | n/a | yes |
+| findings\_data\_s3\_users\_group\_name | The base name of the group to be created for findings data S3 bucket access users. This value has the Terraform workspace appended. | `string` | `"findings_data_s3_users"` | no |
+| findingsbucketfullaccess\_policy\_description | The description to associate with the IAM policy that allows full access to the findings data S3 bucket. | `string` | `"Allows full access to the S3 bucket where findings data is stored."` | no |
+| findingsbucketfullaccess\_policy\_name | The name to associate with the IAM policy that allows full access to the findings data S3 bucket. | `string` | `"FindingsBucketFullAccess"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 | users | A list of the usernames for the users that should be given access to the S3 bucket that manages Assessment findings data. | `list(string)` | n/a | yes |
 
