@@ -16,9 +16,9 @@ locals {
   # if terraform.workspace begins with "prod"
   production_workspace = length(regexall("^prod", terraform.workspace)) == 1
 
-  findings_data_s3_bucket = local.production_workspace ? format("%s-production", var.findings_data_s3_bucket) : format("%s-%s", var.findings_data_s3_bucket, terraform.workspace)
+  findings_data_s3_bucket = format("%s-%s", var.findings_data_s3_bucket, local.production_workspace ? "production" : terraform.workspace)
 
-  findingsbucketfullaccess_policy_name = local.production_workspace ? format("%s-production", var.findingsbucketfullaccess_policy_name) : format("%s-%s", var.findingsbucketfullaccess_policy_name, terraform.workspace)
+  findingsbucketfullaccess_policy_name = format("%s-%s", var.findingsbucketfullaccess_policy_name, local.production_workspace ? "production" : terraform.workspace)
 
-  findings_data_s3_users_group_name = local.production_workspace ? format("%s-production", var.findings_data_s3_users_group_name) : format("%s-%s", var.findings_data_s3_users_group_name, terraform.workspace)
+  findings_data_s3_users_group_name = format("%s-%s", var.findings_data_s3_users_group_name, local.production_workspace ? "production" : terraform.workspace)
 }
