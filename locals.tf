@@ -13,8 +13,8 @@ data "aws_s3_bucket" "findings_data" {
 
 locals {
   # Determine if this is a Production workspace by checking
-  # if terraform.workspace begins with "prod-"
-  production_workspace = length(regexall("^prod-", terraform.workspace)) == 1
+  # if terraform.workspace begins with "prod"
+  production_workspace = length(regexall("^prod", terraform.workspace)) == 1
 
   findings_data_s3_bucket = local.production_workspace ? format("%s-production", var.findings_data_s3_bucket) : format("%s-%s", var.findings_data_s3_bucket, terraform.workspace)
 
