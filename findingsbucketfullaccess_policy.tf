@@ -1,13 +1,11 @@
 # IAM policy document that allows full access to the findings data S3 bucket.
 data "aws_iam_policy_document" "findingsbucketfullaccess_policy_doc" {
   statement {
-    effect = "Allow"
-
     actions = [
       "s3:ListBucket",
       "s3:ListBucketVersions",
     ]
-
+    effect = "Allow"
     resources = [
       data.aws_s3_bucket.findings_data.arn,
     ]
