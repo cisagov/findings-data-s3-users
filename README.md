@@ -1,6 +1,8 @@
 # findings-data-s3-users #
 
 [![GitHub Build Status](https://github.com/cisagov/findings-data-s3-users/workflows/build/badge.svg)](https://github.com/cisagov/findings-data-s3-users/actions)
+[![License](https://img.shields.io/github/license/cisagov/findings-data-s3-users)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/findings-data-s3-users/workflows/CodeQL/badge.svg)](https://github.com/cisagov/findings-data-s3-users/actions/workflows/codeql-analysis.yml)
 
 This is a Terraform project for creating AWS users that have permission to read
 and write to the S3 bucket that is used by the
